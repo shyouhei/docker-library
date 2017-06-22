@@ -10,6 +10,8 @@ VOLUME ["/var/cache/apt-cacher-ng"]
 RUN sed -i s/deb.debian.org/ftp.jp.debian.org/ /etc/apt/sources.list
 RUN apt update && apt upgrade -y && apt-get install -y apt-cacher-ng && apt-get autoremove -y
 RUN echo 'PassThroughPattern: :443$' >> /etc/apt-cacher-ng/acng.conf
+ADD ubuntu_mirrors /tmp/src
+RUN cat /usr/lib/apt-cacher-ng/ubuntu_mirrors /tmp/src | sort -u > /tmp/ubuntu_mirrors && mv /tmp/ubuntu_mirrors /usr/lib/apt-cacher-ng
 
 EXPOSE 3142
 CMD chmod 777 /var/cache/apt-cacher-ng && /etc/init.d/apt-cacher-ng start && tail -f /var/log/apt-cacher-ng/*
