@@ -1,0 +1,1 @@
+class X; true end
