@@ -1,1 +1,1 @@
-$1.nil?
+proc {|var: 1| var}

@@ -1,1 +1,1 @@
-x = true
+case 1 when 1, 1 then nil when 1, a then nil end

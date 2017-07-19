@@ -1,13 +1,13 @@
 # Glitch ruby scripts to have fun with the interpreter.
 #
-# MUST run with -it: sudo docker run -it -rm shyouhei/ruby-afl
-# You can grab the result by: sudo docker cp deadbeef:/root/test_out ~/result
+# RUN sudo docker run --init shyouhei/ruby-afl
+# MONITOR: sudo docker exec deadbeef afl-whatsup /root/test_out
+# RESULT: sudo docker cp deadbeef:/root/test_out ~/result
 #
 FROM debian:stretch-slim
 MAINTAINER shyouhei@ruby-lang.org
 ADD sources.list /etc/apt/
 ADD keywords /root/
-ADD test_in /root/test_in
 
 WORKDIR /root
 
@@ -17,6 +17,7 @@ RUN set -ex                                                        && \
     apt update                                                     && \
     apt-get build-dep -y --no-install-recommends ruby2.3           && \
     apt install -y --no-install-recommends git clang llvm llvm-dev && \
+    apt upgrade -y                                                 && \
     apt autoremove                                                 && \
     apt clean                                                      && \
     rm -rf /var/cache/apt/archives /var/lib/apt/lists
@@ -33,6 +34,7 @@ RUN git clone --depth 1 --branch american-fuzzy-lop --single-branch   \
     autoconf                                                       && \
     ./configure -C --disable-install-doc --with-gcc=afl-clang-fast && \
     make -j4 miniruby
+ADD test_in /root/test_in
 RUN mkdir test_cmin                                                && \
     mkdir test_tmin                                                && \
     mkdir test_out                                                 && \
@@ -46,4 +48,6 @@ RUN mkdir test_cmin                                                && \
     afl-cmin -i test_tmin -o test_in ruby/miniruby @@              && \
     rm -rf test_cmin test_tmin
 
-CMD afl-fuzz -i test_in -o test_out -x keywords ruby/miniruby @@
+CMD afl-fuzz -i test_in -o test_out -M bunny1 -x keywords -t 128 -m 256 -- ruby/miniruby @@ sleep 1 & \
+    afl-fuzz -i test_in -o test_out -S bunny2 -x keywords -t 128 -m 256 -- ruby/miniruby @@ sleep 1 & \
+    afl-fuzz -i test_in -o test_out -S bunny3 -x keywords -t 128 -m 256 -- ruby/miniruby @@

@@ -1,1 +1,1 @@
-1.0 - 1.0
+def self; :foo; end

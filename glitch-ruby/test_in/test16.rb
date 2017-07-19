@@ -1,1 +1,1 @@
-$+.nil?
+def o.foo(var: def bar(var) var; end) var end

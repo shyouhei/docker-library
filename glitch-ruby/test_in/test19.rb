@@ -1,1 +1,1 @@
-$~ != 0
+def o.foo(arg1?:, arg2:) end

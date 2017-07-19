@@ -1,1 +1,1 @@
-[true][0]
+p begin tap do 1 end end

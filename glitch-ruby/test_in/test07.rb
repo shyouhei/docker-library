@@ -1,0 +1,1 @@
+def o.foo(@@x:nil) end

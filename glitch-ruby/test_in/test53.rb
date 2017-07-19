@@ -1,1 +1,1 @@
-1.size >= 4
+m = 1; m do :ok end

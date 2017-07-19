@@ -1,1 +1,3 @@
-X = true
+{label:<<DOC
+DOC
+}

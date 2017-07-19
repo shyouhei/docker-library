@@ -1,1 +1,1 @@
-$~ != /x/
+def m; next; end

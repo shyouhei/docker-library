@@ -1,1 +1,1 @@
--1.0 < 0.0
+p :foo, {proc do end => proc do end, b: proc do end}

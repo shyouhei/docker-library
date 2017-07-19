@@ -1,1 +1,4 @@
-?a < ?z
+loop do
+break
+foo
+end

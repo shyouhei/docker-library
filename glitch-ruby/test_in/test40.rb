@@ -1,1 +1,3 @@
-"#{true}"
+puts <<EOS
+ng
+EOSNO

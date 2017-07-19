@@ -1,1 +1,1 @@
-$'.nil?
+def o.foo(var: bar {|var| var}) var end

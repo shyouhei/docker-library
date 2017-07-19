@@ -1,1 +1,1 @@
-1 >= 0
+def o.foo(var: defined?(var)) var end

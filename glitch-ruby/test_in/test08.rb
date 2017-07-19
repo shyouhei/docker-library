@@ -1,0 +1,1 @@
+def o.foo(**a,&b) end

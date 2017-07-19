@@ -1,1 +1,1 @@
-$~ != -1
+false ? raise {} : tap {}
