@@ -1,0 +1,31 @@
+FROM sorah/ruby:2.4.1 as sorah
+FROM selenium/standalone-chrome:latest
+MAINTAINER shyouhei@ruby-lang.org
+
+USER     root
+WORKDIR /root
+COPY    --from=sorah /root/sorah-ruby.gpg.key .
+
+ADD gemrc /etc
+ADD sources.list /etc/apt
+RUN set -ex \
+ && apt-key add /root/sorah-ruby.gpg.key
+
+RUN set -ex \
+ && mkdir -p /var/lib/apt/lists/partial \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends apt-transport-https \
+ && apt-get clean \
+ && rm -rf /var/cache/apt/archives /var/lib/apt/lists
+
+COPY --from=sorah /etc/apt/sources.list.d/sorah-ruby.list /etc/apt/sources.list.d
+
+RUN set -ex \
+ && mkdir -p /var/lib/apt/lists/partial \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends \
+    curl git-core build-essential libxml2-dev libxslt-dev zlib1g-dev \
+ && apt-get upgrade -y \
+ && apt-get autoremove -y \
+ && apt-get clean \
+ && rm -rf /var/cache/apt/archives /var/lib/apt/lists
