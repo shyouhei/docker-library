@@ -322,3 +322,8 @@ RUN rake 2.4.0 && rm -rf 2.4.0/ruby* DIST && rdfind -makehardlinks true  .
 RUN rake 2.4.1 && rm -rf 2.4.1/ruby* DIST && rdfind -makehardlinks true  .
 RUN rake 2.4.2 && rm -rf 2.4.2/ruby* DIST && rdfind -makehardlinks true  .
 RUN rake 2.5.0-preview1 && rm -rf 2.5.0-preview1/ruby* DIST && rdfind -makehardlinks true  .
+
+
+# RUN set -ex; rm /all-ruby/*/bin/{cc,gcc} && apt-get install vim python3 git-core openssh-client rbenv linux-perf && git config --global url."https://github.com/".insteadOf "git@github.com:" && rbenv init 2>> ~/.bashrc; exec bash
+# RUN set -ex; cd ~/.rbenv && ln -s /all-ruby/*.* versions/ && cd /tmp && git clone git@github.com:shyouhei/optdown.git && sync && sync && sync
+# RUN set -ex; cd /tmp/optdown && rbenv rehash && rbenv shell 2.5.0-preview1 && bundle install -j1 && bundle exec rake prepare
