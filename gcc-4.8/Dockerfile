@@ -11,7 +11,7 @@ RUN apt-get update && \
 ADD 98gcc.list        /etc/apt/sources.list.d/
 ADD 99llvm.list       /etc/apt/sources.list.d/
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 60C317803A41BA51845E371A1E9377A2BA9EF27F
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 60C317803A41BA51845E371A1E9377A2BA9EF27F
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
 RUN sed -i 's/^# deb/deb/' /etc/apt/sources.list
 RUN dpkg --add-architecture i386
