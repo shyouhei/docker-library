@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  apt-cacher-ng:
+    build: .
+    image: shyouhei/apt-cacher-ng
+    container_name: apt-cacher-ng
+    restart: unless-stopped
+    ports: [ "172.17.0.1:3142:3142" ]
+    volumes:
+      - type: volume
+        source: apt-cacher-ng
+        target: /var/cache/apt-cacher-ng
+
+volumes:
+  apt-cacher-ng:
+    name: apt-cacher-ng
+    driver: local
+    
