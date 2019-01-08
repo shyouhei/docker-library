@@ -1,0 +1,20 @@
+# This docker-compose.yml won't interface well with the pseudo tty.
+
+version: "3.7"
+services:
+  dev-base:
+    build: .
+    image: shyouhei/dev-base
+    stdin_open: true
+    tty: true
+    privileged: false
+    init: true
+    environment:
+      DISPLAY:
+    volumes:
+      - type: bind
+        source: /tmp/.X11-unix
+        target: /tmp/.X11-unix
+      - type: bind
+        source: /home/shyouhei
+        target: /home/shyouhei
