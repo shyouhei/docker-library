@@ -30,7 +30,7 @@ RUN apt-get update && \
         gcc-6   gcc-6-multilib \
         gcc-7   gcc-7-multilib \
         gcc-8   gcc-8-multilib \
-        clang-3.9 clang-4.0 clang-5.0 clang-6.0 clang-7 clang-8 \
+        clang-3.9 clang-4.0 clang-5.0 clang-6.0 clang-7 clang-8 clang-9 \
         libffi-dev libffi-dev:i386 libffi6:i386 \
         libgdbm-dev libgdbm-dev:i386 libgdbm5:i386 \
         libgmp-dev \
