@@ -1,6 +1,7 @@
 # Run: sudo docker-compose up -d
 #
 # Client setup: echo 'Acquire::HTTP::Proxy "http://172.17.0.1:3142";' >> /etc/apt/apt.conf.d/01proxy
+# Maybe also: echo 'Acquire::HTTPS::Proxy "DIRECT";' >> /etc/apt/apt.conf.d/01proxy
 FROM debian:stretch-slim
 MAINTAINER shyouhei@ruby-lang.org
 
