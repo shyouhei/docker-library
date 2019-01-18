@@ -38,16 +38,17 @@ RUN apt-get update && \
         libncurses5-dev libncurses5-dev:i386 libncurses5:i386 \
         libncursesw5-dev libncursesw5-dev:i386 \
         libreadline6-dev libreadline6-dev:i386 libreadline7:i386 \
-        libssl-dev libssl-dev:i386 libssl1.0.0:i386 \
+        libssl-dev libssl-dev:i386 libssl1.1:i386 \
         libyaml-dev \
         linux-libc-dev:i386 \
         zlib1g-dev zlib1g-dev:i386 zlib1g:i386 \
         openssl \
         valgrind \ 
-        build-essential git subversion parallel ruby rbenv ruby-build \
-        xz-utils pixz pigz nkf lv lzop pcregrep jq sl tree \
+        build-essential git git-man subversion parallel ruby rbenv ruby-build \
+        xz-utils pixz pigz nkf less lv lzop pcregrep jq sl tree \
         openssh-client gist zsh vim tmux xsel \
         manpages manpages-dev manpages-posix manpages-posix-dev \
+        tzdata \
         libmysqlclient-dev libpq-dev libsqlite3-dev libxml2-dev libxmlsec1-dev && \
     apt-get build-dep -y ruby2.5 ruby2.5:i386 && \
     apt-get upgrade -y && \
