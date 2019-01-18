@@ -61,10 +61,3 @@ RUN apt-get update && \
 COPY --from=ghq /go/bin/ghq /usr/local/bin/ghq
 
 RUN useradd -u 10347 shyouhei
-RUN mkdir -p /tmp/.X11-unix
-USER shyouhei
-VOLUME ["/home/shyouhei", "/tmp/.X11-unix"]
-WORKDIR /home/shyouhei
-
-ENTRYPOINT ["/usr/bin/tmux"]
-CMD ["-2u", "new-session"]

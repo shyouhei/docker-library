@@ -1,0 +1,13 @@
+# Run: ./run.sh
+# Hint: don't try to docker-compose up, that should break the terminal.
+
+FROM shyouhei/dev-base:latest
+MAINTAINER shyouhei@ruby-lang.org
+
+RUN mkdir -p /tmp/.X11-unix
+USER shyouhei
+VOLUME ["/home/shyouhei", "/tmp/.X11-unix"]
+WORKDIR /home/shyouhei
+
+ENTRYPOINT ["/usr/bin/tmux"]
+CMD ["-2u", "new-session"]
