@@ -11,24 +11,32 @@ ADD 01no-cache        /etc/apt/apt.conf.d/
 ADD 02autopilot       /etc/apt/apt.conf.d/
 ADD 03force-unsafe-io /etc/dpkg/dpkg.cfg.d/
 ADD 04proxy           /etc/apt/apt.conf.d/
+
 RUN apt-get update \
  && apt-get install -y wget gnupg2 ca-certificates \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
+
 ADD 98gcc.list        /etc/apt/sources.list.d/
 ADD 99llvm.list       /etc/apt/sources.list.d/
+
 ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-key adv \
       --keyserver hkp://keyserver.ubuntu.com:80 \
       --recv-keys 60C317803A41BA51845E371A1E9377A2BA9EF27F
+
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key \
   | apt-key add -
+
 RUN grep '^deb ' /etc/apt/sources.list \
   | sed 's/^deb /deb-src /' \
   | tee /etc/apt/sources.list.d/deb-src.list
+
 RUN dpkg --add-architecture i386
+
 RUN apt-get update \
- && apt-get install -y \
+ && apt-get install -yy --no-install-recommends --no-install-suggests \
         gcc     gcc-multilib \
         gcc-4.8 gcc-4.8-multilib \
         gcc-5   gcc-5-multilib \
@@ -50,12 +58,11 @@ RUN apt-get update \
         openssl \
         valgrind \ 
         build-essential git git-man subversion parallel ruby rbenv ruby-build \
-        xz-utils pixz pigz nkf less lv lzop pcregrep jq sl tree \
-        openssh-client gist zsh vim tmux xsel \
         manpages manpages-dev manpages-posix manpages-posix-dev \
         tzdata \
         libmysqlclient-dev libpq-dev libsqlite3-dev libxml2-dev libxmlsec1-dev \
- && apt-get build-dep -y ruby2.5 ruby2.5:i386 \
+ && apt-get build-dep -yy --no-install-recommends --no-install-suggests \
+        ruby2.5 ruby2.5:i386 \
  && apt-get upgrade -y \
  && apt-get clean \
  && apt-get autoremove \
