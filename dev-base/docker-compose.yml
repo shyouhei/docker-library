@@ -34,3 +34,8 @@ services:
       - type: bind
         source: /home/shyouhei
         target: /home/shyouhei
+    # https://stackoverflow.com/a/46676907
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_PTRACE

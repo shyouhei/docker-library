@@ -15,4 +15,7 @@ exec sudo docker run \
        type=bind,source=/etc/timezone,target=/etc/timezone,readonly \
      --mount \
        type=bind,source=/home/shyouhei,target=/home/shyouhei \
+     --security-opt \
+       seccomp=unconfined \
+     --cap-add=SYS_PTRACE \
      shyouhei/dev-tmux
