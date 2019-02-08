@@ -1,0 +1,17 @@
+diff --git a/script/bench.rb b/script/bench.rb
+index a93b44fa..a3c7bac7 100644
+--- a/script/bench.rb
++++ b/script/bench.rb
+@@ -237,12 +237,6 @@ begin
+
+   tests.concat(tests.map { |k, url| ["#{k}_admin", "#{url}#{append}"] })
+
+-  tests.each do |_, path|
+-    if `curl -s -I "http://127.0.0.1:#{@port}#{path}"` !~ /200 OK/
+-      raise "#{path} returned non 200 response code"
+-    end
+-  end
+-
+   # NOTE: we run the most expensive page first in the bench
+
+   def best_of(a, b)
