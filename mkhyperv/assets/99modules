@@ -1,0 +1,4 @@
+hv_vmbus
+hv_storvsc
+hv_blkvsc
+hv_netvsc
