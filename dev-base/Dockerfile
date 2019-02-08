@@ -7,19 +7,13 @@ RUN go get github.com/motemen/ghq
 FROM ubuntu:bionic
 MAINTAINER shyouhei@ruby-lang.org
 
-ADD 01no-cache        /etc/apt/apt.conf.d/
-ADD 02autopilot       /etc/apt/apt.conf.d/
-ADD 03force-unsafe-io /etc/dpkg/dpkg.cfg.d/
-ADD 04proxy           /etc/apt/apt.conf.d/
-ADD 05compress        /etc/apt/apt.conf.d/
-ADD 06translations    /etc/apt/apt.conf.d/
-ADD 07nodoc           /etc/dpkg/dpkg.cfg.d/
-ADD 08autoclean       /etc/apt/apt.conf.d/
+ADD assets/99apt.conf /etc/apt/apt.conf.d/
+ADD assets/99dpkg.cfg /etc/dpkg/dpkg.cfg.d/
 
-RUN apt-get update && apt-get install -yy wget gnupg2 ca-certificates
+RUN apt-get update && apt-get install wget gnupg2 ca-certificates
 
-ADD 98gcc.list        /etc/apt/sources.list.d/
-ADD 99llvm.list       /etc/apt/sources.list.d/
+ADD assets/98gcc.list  /etc/apt/sources.list.d/
+ADD assets/99llvm.list /etc/apt/sources.list.d/
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -37,7 +31,7 @@ RUN grep '^deb ' /etc/apt/sources.list \
 RUN dpkg --add-architecture i386
 
 RUN apt-get update \
- && apt-get install -yy \
+ && apt-get install \
         gcc     gcc-multilib \
         gcc-4.8 gcc-4.8-multilib \
         gcc-5   gcc-5-multilib \
@@ -63,9 +57,10 @@ RUN apt-get update \
         manpages manpages-dev manpages-posix manpages-posix-dev \
         tzdata \
         libmysqlclient-dev libpq-dev libsqlite3-dev libxml2-dev libxmlsec1-dev \
- && apt-get build-dep -yy \
+ && apt-get build-dep \
         ruby2.5 ruby2.5:i386 \
- && apt-get upgrade -yy
+ && apt-get upgrade \
+ && apt-get autoremove
 
 # tcc chicken-bin ghc rustc ocaml w3m
 

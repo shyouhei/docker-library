@@ -1,3 +1,0 @@
-Dpkg::Use-Pty "0";
-APT::Install-Recommends "0";
-// quiet "2";
