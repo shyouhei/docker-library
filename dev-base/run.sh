@@ -18,4 +18,7 @@ exec sudo docker run \
      --security-opt \
        seccomp=unconfined \
      --cap-add=SYS_PTRACE \
+     --cap-add=SYS_ADMIN \
+     --dns=8.8.8.8 \
+     --dns=8.8.4.4 \
      shyouhei/dev-tmux

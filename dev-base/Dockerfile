@@ -11,11 +11,12 @@ ADD 01no-cache        /etc/apt/apt.conf.d/
 ADD 02autopilot       /etc/apt/apt.conf.d/
 ADD 03force-unsafe-io /etc/dpkg/dpkg.cfg.d/
 ADD 04proxy           /etc/apt/apt.conf.d/
+ADD 05compress        /etc/apt/apt.conf.d/
+ADD 06translations    /etc/apt/apt.conf.d/
+ADD 07nodoc           /etc/dpkg/dpkg.cfg.d/
+ADD 08autoclean       /etc/apt/apt.conf.d/
 
-RUN apt-get update \
- && apt-get install -y wget gnupg2 ca-certificates \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -yy wget gnupg2 ca-certificates
 
 ADD 98gcc.list        /etc/apt/sources.list.d/
 ADD 99llvm.list       /etc/apt/sources.list.d/
@@ -36,7 +37,7 @@ RUN grep '^deb ' /etc/apt/sources.list \
 RUN dpkg --add-architecture i386
 
 RUN apt-get update \
- && apt-get install -yy --no-install-recommends --no-install-suggests \
+ && apt-get install -yy \
         gcc     gcc-multilib \
         gcc-4.8 gcc-4.8-multilib \
         gcc-5   gcc-5-multilib \
@@ -62,12 +63,9 @@ RUN apt-get update \
         manpages manpages-dev manpages-posix manpages-posix-dev \
         tzdata \
         libmysqlclient-dev libpq-dev libsqlite3-dev libxml2-dev libxmlsec1-dev \
- && apt-get build-dep -yy --no-install-recommends --no-install-suggests \
+ && apt-get build-dep -yy \
         ruby2.5 ruby2.5:i386 \
- && apt-get upgrade -y \
- && apt-get clean \
- && apt-get autoremove \
- && rm -rf /var/lib/apt/lists/*
+ && apt-get upgrade -yy
 
 # tcc chicken-bin ghc rustc ocaml w3m
 

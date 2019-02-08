@@ -5,15 +5,14 @@ FROM shyouhei/dev-base:latest
 MAINTAINER shyouhei@ruby-lang.org
 
 RUN apt-get update \
- && apt-get install -yy --no-install-recommends --no-install-suggests \
+ && apt-get install -yy \
         xz-utils pixz pigz nkf less lv lzop pcregrep jq sl tree \
-        openssh-client gist zsh vim tmux xsel \
- && apt-get upgrade -y \
- && apt-get clean \
- && apt-get autoremove \
- && rm -rf /var/lib/apt/lists/*
+        openssh-client gist zsh vim tmux xsel sudo \
+ && apt-get upgrade -y
 
 RUN mkdir -p /tmp/.X11-unix
+RUN usermod -a -G sudo shyouhei
+RUN passwd -d shyouhei
 USER shyouhei
 VOLUME ["/home/shyouhei", "/tmp/.X11-unix"]
 WORKDIR /home/shyouhei

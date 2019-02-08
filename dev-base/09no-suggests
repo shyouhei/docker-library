@@ -1,0 +1,4 @@
+# https://askubuntu.com/a/399078
+APT::Install-Recommends "false";
+APT::AutoRemove::RecommendsImportant "false";
+APT::AutoRemove::SuggestsImportant "false";
