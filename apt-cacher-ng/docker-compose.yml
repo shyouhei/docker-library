@@ -5,7 +5,16 @@ services:
     image: shyouhei/apt-cacher-ng
     container_name: apt-cacher-ng
     restart: unless-stopped
-    ports: [ "172.17.0.1:3142:3142" ]
+    ports:
+      - target: "3142"
+        published: "3142"
+        protocol: "tcp"
+        mode: "host"
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    dns_search:
+      - configure.ac
     volumes:
       - type: volume
         source: apt-cacher-ng
