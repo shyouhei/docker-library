@@ -2,7 +2,7 @@
 
 set -x
 
-root=/mnt/datasink/systemd-nspawn/discourse-bench
+root=/home/shyouhei/data/machines/discourse-bench
 
 enter() {
     sudo systemd-nspawn \
@@ -20,7 +20,8 @@ if [ ! -d $root ]; then
     arch=amd64
     variant=minbase
     version=bionic
-    apt_cacher="http://172.17.0.1:3142"
+    #apt_cacher="http://172.17.0.1:3142"
+    apt_cacher="http:/"
 
     sudo apt install systemd-container debootstrap
 
@@ -30,7 +31,7 @@ if [ ! -d $root ]; then
          --arch="$arch" \
          --variant="$variant" \
          "$version" "$root" \
-         "$apt_cacher/archive.ubuntu.com/ubuntu"
+         "$apt_cacher/jp.archive.ubuntu.com/ubuntu"
 
     enter -a passwd -d root
     enter -a useradd -m -u 10347 -G sudo -s /bin/bash shyouhei
@@ -46,6 +47,7 @@ if [ ! -d $root ]; then
           /etc/apt/sources.list.d/99sources.list
 
     enter -a apt update
+    enter -a apt install gcc-8
     enter -a apt build-dep $aptopts ruby2.5
     enter -a apt install $aptopts postgresql \
           dbus systemd redis-server libpq-dev libjemalloc-dev valgrind \

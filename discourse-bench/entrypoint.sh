@@ -23,6 +23,10 @@ gem "fileutils"
 gem "date"
 gem "gabbler"
 EOF
+    # erase BUNDLED_WITH
+    head -n -2 Gemfile.lock > tmp.lock
+    rm Gemfile.lock
+    mv tmp.lock Gemfile.lock
 fi
 
 # global setup
@@ -32,9 +36,6 @@ cd /var/discourse/discourse
 rbenv local $DISCOURSE_RBENV
 set -x
 
-gem install bundler:1.7.3 --no-doc
-rbenv rehash
-
 # run the bench
-bundle _1.7.3_ install -j$(nproc) --path=vendor/bundle
+bundle install -j$(nproc) --path=vendor/bundle
 RAILS_ENV=profile bundle exec ruby script/bench.rb
