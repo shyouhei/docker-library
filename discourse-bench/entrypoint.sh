@@ -11,7 +11,9 @@ GRANT ALL PRIVILEGES ON DATABASE discourse_profile TO shyouhei;
 CREATE EXTENSION hstore;
 EOF
 
-    git clone --depth=1 \
+    git clone \
+	--depth=1 \
+	--branch=v2.2.2 \
 	https://github.com/discourse/discourse.git \
 	/var/discourse/discourse
 
@@ -24,9 +26,9 @@ gem "date"
 gem "gabbler"
 EOF
     # erase BUNDLED_WITH
-    head -n -2 Gemfile.lock > tmp.lock
-    rm Gemfile.lock
-    mv tmp.lock Gemfile.lock
+    cd /var/discourse/discourse
+    sed -i '$d' Gemfile.lock
+    sed -i '$d' Gemfile.lock
 fi
 
 # global setup
