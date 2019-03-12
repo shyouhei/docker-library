@@ -51,7 +51,8 @@ if [ ! -d $root ]; then
     enter -a apt install $aptopts postgresql \
           dbus systemd redis-server gcc-8 libpq-dev libjemalloc-dev valgrind \
           gawk curl pngcrush git ruby ruby-dev rubygems ruby-bundler rbenv sudo \
-	  curl wget apache2-utils optipng jhead gifsicle npm pngcrush
+	  curl wget apache2-utils optipng jhead gifsicle npm pngcrush \
+	  linux-tools-generic
     enter -a npm install -g svgo
 
     enter -a sed -i 's/^supervised no/supervised systemd/' /etc/redis/redis.conf
@@ -65,4 +66,6 @@ fi
 
 enter -a apt update
 enter -a apt -yy upgrade
-enter --boot --overlay='/home/shyouhei::/home/shyouhei'
+enter --boot \
+      --overlay='/home/shyouhei::/home/shyouhei' \
+      --system-call-filter='perf_event_open'
