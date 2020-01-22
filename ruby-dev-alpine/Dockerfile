@@ -5,6 +5,7 @@ RUN apk add --no-cache \
     autoconf \
     bison \
     gcc \
+    git \
     gdbm-dev \
     glib-dev \
     gmp-dev \
