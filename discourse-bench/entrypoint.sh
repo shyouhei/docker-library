@@ -13,7 +13,7 @@ EOF
 
     git clone \
 	--depth=1 \
-	--branch=v2.2.2 \
+	--branch=v2.3.4 \
 	https://github.com/discourse/discourse.git \
 	/var/discourse/discourse
 
@@ -31,6 +31,8 @@ EOF
     sed -i '$d' Gemfile.lock
 fi
 
+mkdir -p /var/discourse/discourse/public/uploads
+
 # global setup
 source ~/.bashrc 
 eval "$(rbenv init - bash)"
@@ -40,4 +42,5 @@ set -x
 
 # run the bench
 bundle install -j$(nproc) --path=vendor/bundle
-RAILS_ENV=profile bundle exec ruby script/bench.rb
+ulimit -n 32768
+RAILS_ENV=profile bundle exec ruby script/bench.rb -o ../$DISCOURSE_RBENV.json

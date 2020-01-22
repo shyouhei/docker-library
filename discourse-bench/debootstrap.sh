@@ -49,9 +49,9 @@ if [ ! -d $root ]; then
     enter -a apt update
     enter -a apt build-dep $aptopts ruby2.5
     enter -a apt install $aptopts postgresql \
-          dbus systemd redis-server gcc-8 libpq-dev libjemalloc-dev valgrind \
+          dbus systemd redis-server gcc-8 g++-8 libpq-dev libjemalloc-dev valgrind \
           gawk curl pngcrush git ruby ruby-dev rubygems ruby-bundler rbenv sudo \
-	  curl wget apache2-utils optipng jhead gifsicle npm pngcrush \
+	  curl wget apache2-utils optipng jhead gifsicle npm pngcrush brotli \
 	  linux-tools-generic
     enter -a npm install -g svgo
 
