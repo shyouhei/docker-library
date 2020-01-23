@@ -5,11 +5,12 @@ RUN apk add --no-cache \
     autoconf \
     bison \
     gcc \
-    git \
     gdbm-dev \
+    git \
     glib-dev \
     gmp-dev \
     libc-dev \
+    libc6-compat \
     libffi-dev \
     libxml2-dev \
     libxslt-dev \
@@ -22,4 +23,4 @@ RUN apk add --no-cache \
     readline-dev \
     ruby \
     yaml-dev \
-    zlib-dev \
+    zlib-dev
