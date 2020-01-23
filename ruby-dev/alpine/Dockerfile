@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM alpine:latest
 MAINTAINER shyouhei@ruby-lang.org
 
 RUN apk add --no-cache \
