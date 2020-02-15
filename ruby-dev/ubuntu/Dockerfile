@@ -9,4 +9,9 @@ RUN set -ex \
   | sed 's/^deb /deb-src /' \
   | tee /etc/apt/sources.list.d/deb-src.list \
  && apt-get update \
- && apt-get build-dep ruby2.5
+ && apt-get build-dep ruby2.5 \
+ && apt-get install tzdata sudo \
+ && useradd -m -u 10347 -G sudo
+
+USER shyouhei
+WORKDIR /home/shyouhei

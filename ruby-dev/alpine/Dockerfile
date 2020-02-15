@@ -22,5 +22,11 @@ RUN apk add --no-cache \
     procps \
     readline-dev \
     ruby \
+    sudo \
+    tzdata \
     yaml-dev \
-    zlib-dev
+    zlib-dev \
+ && useradd -m -u 10347 -G sudo
+
+USER shyouhei
+WORKDIR /home/shyouhei
