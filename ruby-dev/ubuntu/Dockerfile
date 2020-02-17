@@ -3,6 +3,7 @@ MAINTAINER shyouhei@ruby-lang.org
 
 ADD assets/99apt.conf /etc/apt/apt.conf.d/
 ADD assets/99dpkg.cfg /etc/dpkg/dpkg.cfg.d/
+ADD assets/sudo.conf /etc/
 
 RUN set -ex \
  && grep '^deb ' /etc/apt/sources.list \
@@ -11,7 +12,8 @@ RUN set -ex \
  && apt-get update \
  && apt-get build-dep ruby2.5 \
  && apt-get install tzdata sudo \
- && useradd -m -u 10347 -G sudo
+ && useradd -m -u 10347 -G sudo shyouhei
 
+ADD assets/99sudoers /etc/sudoers.d
 USER shyouhei
 WORKDIR /home/shyouhei

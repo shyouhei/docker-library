@@ -1,6 +1,7 @@
 FROM alpine:latest
 MAINTAINER shyouhei@ruby-lang.org
 
+ADD assets/sudo.conf /etc/
 RUN apk add --no-cache \
     autoconf \
     bison \
@@ -26,7 +27,8 @@ RUN apk add --no-cache \
     tzdata \
     yaml-dev \
     zlib-dev \
- && useradd -m -u 10347 -G sudo
+ && adduser -u 10347 -D shyouhei
 
+ADD assets/99sudoers /etc/sudoers.d
 USER shyouhei
 WORKDIR /home/shyouhei
