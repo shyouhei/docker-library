@@ -11,7 +11,7 @@ RUN set -ex \
   | tee /etc/apt/sources.list.d/deb-src.list \
  && apt-get update \
  && apt-get build-dep ruby2.5 \
- && apt-get install tzdata sudo git \
+ && apt-get install tzdata sudo git ruby \
  && useradd -m -u 10347 -G sudo shyouhei
 
 ADD assets/99sudoers /etc/sudoers.d
