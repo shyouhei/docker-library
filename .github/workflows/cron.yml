@@ -20,4 +20,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: trigger
-        run: curl --data build=true -X POST ${{ matrix.url }}
+        run: curl -X POST ${{ matrix.url }}
