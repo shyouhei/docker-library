@@ -14,6 +14,9 @@ RUN set -ex \
  && apt-get install tzdata sudo git ruby \
  && useradd -m -u 10347 -G sudo shyouhei
 
+RUN rm /usr/bin/man
+ && dpkg-divert --quiet --remove --rename /usr/bin/man
+
 ADD assets/99sudoers /etc/sudoers.d
 USER shyouhei
 WORKDIR /home/shyouhei
