@@ -47,10 +47,12 @@ RUN yum install -y \
     zlib-devel
 
 RUN mkdir -p /opt
-RUN tar \
+RUN for i in *.tar.bz2; do \
+    tar \
     --strip=1 \
     -C /opt \
     --exclude=developerstudio*.*/OIC \
     --exclude=developerstudio*.*/lib/netbeans \
     --exclude=developerstudio*.*/lib/devstudio \
-    -xpf *.tar.bz2
+    -xpf $i; \
+    done
