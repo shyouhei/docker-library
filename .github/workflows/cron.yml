@@ -13,9 +13,9 @@ jobs:
           # This is for shyouhei/c-compilers
           - 'https://hub.docker.com/api/build/v1/source/e14b08d6-86b1-4927-8c4b-fed8b366ca5c/trigger/055ef2da-c076-476b-b273-ec3feb7624d0/call/'
           # This is for shyouhei/ruby-dev-alpine
-          - 'https://hub.docker.com/api/build/v1/source/30b9cc65-d7d3-420b-a56d-1bd6e7bb427a/trigger/dd3fcb40-d5c0-48d6-b370-c9e6177cf521/call/'
+          # - 'https://hub.docker.com/api/build/v1/source/30b9cc65-d7d3-420b-a56d-1bd6e7bb427a/trigger/dd3fcb40-d5c0-48d6-b370-c9e6177cf521/call/'
           # This is for shyouhei/ruby-dev-ubuntu
-          - 'https://hub.docker.com/api/build/v1/source/f51b3557-5612-4b02-8e78-99b0c211a77c/trigger/d29ff8b4-bece-4b21-bfe8-a85a3aa30f90/call/'
+          # - 'https://hub.docker.com/api/build/v1/source/f51b3557-5612-4b02-8e78-99b0c211a77c/trigger/d29ff8b4-bece-4b21-bfe8-a85a3aa30f90/call/'
 
     runs-on: ubuntu-latest
     steps:
